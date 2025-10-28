@@ -1,0 +1,20 @@
+[package]
+name = "sol-test"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]   # <-- THIS creates the .so and deploy bundle
+
+[dependencies]
+solana-address = "1.0.0"
+solana-program = "2.3.0"
+solana-pubkey = "2.4.0"
+solana-system-interface = { version = "2.0.0", features = ["bincode"] }
+
+[profile.release]
+opt-level = "z"
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+strip = "symbols"
